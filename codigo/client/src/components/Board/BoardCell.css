@@ -1,85 +1,96 @@
-/* ========================================
-   Variables y estilos globales (igual que antes)
-======================================== */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
 
+/* ========================================
+   Variables Globales
+======================================== */
 :root {
-  --primary: #a2d5f2;
-  --primary-dark: #415a77;
+  /* Colores base */
+  --primary: #a2d5f2;            /* Azul claro */
+  --primary-dark: #415a77;       /* Azul oscuro */
   --success: #22c55e;
   --error: #ef4444;
   --text-light: #f8fafc;
   --text-dark: #f1f5f9;
   --background: rgba(255, 255, 255, 0.05);
   --card-background: rgba(255, 255, 255, 0.1);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
-  --border-radius: 12px;
+  --border-radius: 15px;
 
-  /* Variables para Puzzle (usadas en PuzzleBoard/PuzzlePiece) */
+  /* Variables para el Puzzle */
   --primary-color: #2563eb;
   --secondary-color: #3b82f6;
-  --background-color: #f8fafc;
-  --border-color: #e2e8f0;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --background-color: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.3);
+  --shadow-color: rgba(0, 0, 0, 0.7);
   --piece-size: 100px;
   --board-gap: 12px;
   --transition-speed: 0.3s;
 }
 
+/* Reset */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 /* ========================================
-   Contenedor general dividido en dos columnas
+   Estilos Globales
+======================================== */
+html, body {
+  height: 100%;
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77);
+  overflow: hidden;
+  color: #fff;
+}
+
+/* ========================================
+   Contenedor Principal: Dividido en 2 Mitades
 ======================================== */
 .board-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
 }
 
-/* ========================================
+/* ----------------------------------------
    Sección Izquierda: Información del Juego
-======================================== */
+---------------------------------------- */
 .game-info {
-  padding: 0.5rem;
-  display: grid;
-  grid-template-rows: auto auto auto auto;
-  gap: 0.5rem;
-  overflow-y: auto;  /* Si la izquierda tiene mucho contenido */
-  background: rgba(0, 0, 0, 0.05);
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Jugadores */
 .players-section {
   display: flex;
-  gap: 0.25rem;
+  flex-wrap: wrap;
+  gap: 15px;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .player-card {
-  background: var(--card-background);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--border-radius);
-  padding: 0.25rem;
+  padding: 10px;
   flex: 1 1 120px;
   text-align: center;
   box-shadow: var(--shadow-md);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   min-width: 100px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .player-card.active {
@@ -90,45 +101,44 @@
 
 .player-name {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 0.15rem;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--primary);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.7);
 }
 
 .player-score {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: var(--primary);
-  margin: 0.25rem 0;
-  display: block;
+  margin: 5px 0;
 }
 
 .player-stats small {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--text-dark);
 }
 
 /* Ecuación */
 .equation-section {
-  background: var(--card-background);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--border-radius);
-  padding: 0.25rem;
+  padding: 10px;
   text-align: center;
   box-shadow: var(--shadow-md);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 15px;
 }
 
 .equation-display {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--primary);
   display: flex;
-  gap: 0.15rem;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 .equation-unknown {
@@ -144,18 +154,17 @@
 
 /* Feedback */
 .feedback-message {
-  position: relative;
-  background: var(--card-background);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--border-radius);
-  padding: 0.25rem 0.5rem;
-  font-size: 1.5rem;
+  padding: 10px 20px;
+  font-size: 1.6rem;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 10px;
   box-shadow: var(--shadow-lg);
-  margin: 0 auto;
+  margin: 15px auto;
   width: fit-content;
 }
 
@@ -170,43 +179,42 @@
 }
 
 .feedback-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
-/* Números */
+/* Grid de Números */
 .numbers-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.25rem;
-  justify-items: center;
-  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .number-button {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  padding: 0.5rem;
+  padding: 10px;
   border: none;
   background: var(--primary);
   color: var(--text-light);
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  /* Eliminamos el translateY del hover para evitar conflicto con el efecto magnético */
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .number-button:hover {
   background: var(--primary-dark);
-  transform: translateY(-2px);
+  /* Se elimina el translateY para no interferir con el efecto magnético */
   box-shadow: var(--shadow-md);
 }
 
 .number-button:active {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
 .number-button::after {
@@ -218,7 +226,8 @@
   height: 100%;
   background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
   transform: translateX(-100%);
-  transition: 0.5s;
+  transition: transform 0.5s;
+  pointer-events: none;
 }
 
 .number-button:hover::after {
@@ -249,53 +258,65 @@
 
 /* Estadísticas */
 .game-stats {
-  background: var(--card-background);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--border-radius);
-  padding: 0.25rem 0.5rem;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.25rem;
+  gap: 10px;
   box-shadow: var(--shadow-md);
+  margin-top: 15px;
 }
 
 .stat-item {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 5px;
 }
 
 .stat-icon {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 
-/* ========================================
-   Sección Derecha: Puzzle
-======================================== */
+/* ----------------------------------------
+   Sección Derecha: Puzzle (Glassmorphism)
+---------------------------------------- */
 .puzzle-wrapper {
-  padding: 0.5rem;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
   overflow-y: auto;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
 }
 
-/* Los estilos del puzzle (PuzzleBoard y PuzzlePiece)
-   se mantienen en su CSS unificado (ver código anterior) */
+.puzzle-wrapper h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--primary);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+  text-align: center;
+}
+
+/* PuzzleBoard */
 .puzzle-board {
   display: grid;
   grid-template-columns: repeat(3, var(--piece-size));
   grid-template-rows: repeat(3, var(--piece-size));
   gap: var(--board-gap);
   max-width: calc(3 * var(--piece-size) + 2 * var(--board-gap));
-  margin: 1rem auto;
-  padding: 1.5rem;
-  background: var(--background-color);
-  border-radius: 16px;
-  box-shadow: 
-    0 10px 15px -3px var(--shadow-color),
-    0 4px 6px -4px var(--shadow-color);
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
   position: relative;
   transition: transform var(--transition-speed);
 }
@@ -304,19 +325,16 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 16px;
+  border-radius: 15px;
   padding: 2px;
   background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
 
+/* Puzzle cells & pieces */
 .puzzle-cell {
   width: var(--piece-size);
   height: var(--piece-size);
@@ -324,19 +342,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--background-color);
+  background: rgba(255,255,255,0.1);
   position: relative;
 }
 
 .puzzle-cell.empty:hover {
-  background: #eaf2ff;
+  background: rgba(234,242,255,0.2);
 }
 
 .puzzle-piece {
   width: 100%;
   height: 100%;
   border-radius: 12px;
-  background: white;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -347,24 +365,21 @@
   user-select: none;
   position: relative;
   transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 4px 6px -1px var(--shadow-color),
-    0 2px 4px -2px var(--shadow-color);
+  box-shadow: 0 4px 6px -1px var(--shadow-color),
+              0 2px 4px -2px var(--shadow-color);
 }
 
 .puzzle-piece:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 10px 15px -3px var(--shadow-color),
-    0 4px 6px -4px var(--shadow-color);
+  box-shadow: 0 10px 15px -3px var(--shadow-color),
+              0 4px 6px -4px var(--shadow-color);
 }
 
 .puzzle-piece:active {
   cursor: grabbing;
   transform: scale(1.05) rotate(2deg);
-  box-shadow: 
-    0 20px 25px -5px var(--shadow-color),
-    0 8px 10px -6px var(--shadow-color);
+  box-shadow: 0 20px 25px -5px var(--shadow-color),
+              0 8px 10px -6px var(--shadow-color);
 }
 
 .puzzle-piece::after {
@@ -375,12 +390,7 @@
   right: 0;
   bottom: 0;
   border-radius: 12px;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transform: translateX(-100%);
   transition: transform 0.5s;
 }
@@ -407,11 +417,11 @@
   }
   
   .game-info, .puzzle-wrapper {
-    padding: 0.25rem;
+    padding: 10px;
   }
   
   .puzzle-board {
-    padding: 1rem;
+    padding: 10px;
   }
 }
 
@@ -422,32 +432,10 @@
   }
   
   .puzzle-board {
-    padding: 1rem;
+    padding: 10px;
   }
   
   .puzzle-piece {
     font-size: 1.25rem;
   }
 }
-
-.popup-message {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ffdddd;
-  color: #d8000c;
-  padding: 10px 20px;
-  border: 1px solid #d8000c;
-  border-radius: 5px;
-  z-index: 1000;
-  font-weight: bold;
-  animation: fadeOut 0.5s forwards;
-}
-
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-

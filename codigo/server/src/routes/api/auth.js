@@ -1,6 +1,5 @@
 import express from 'express';
 import AuthController from '../../controllers/authController.js';
-
 const router = express.Router();
 
 /**
@@ -11,36 +10,8 @@ const router = express.Router();
  *       type: http
  *       scheme: bearer
  *       bearerFormat: JWT
- *   schemas:
- *     UserRegistration:
- *       type: object
- *       required:
- *         - username
- *         - password
- *       properties:
- *         username:
- *           type: string
- *           example: JohnDoe
- *         password:
- *           type: string
- *           example: StrongPass123
- *     UserLogin:
- *       type: object
- *       required:
- *         - username
- *         - password
- *       properties:
- *         username:
- *           type: string
- *           example: JohnDoe
- *         password:
- *           type: string
- *           example: StrongPass123
- */
-
-/**
- * @swagger
- * /auth/register:
+ * 
+ * /api/auth/register:
  *   post:
  *     summary: Registro de un nuevo usuario
  *     tags: [Auth]
@@ -49,7 +20,17 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserRegistration'
+ *             type: object
+ *             required:
+ *               - username
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: Usuario
+ *               password:
+ *                 type: string
+ *                 example: Usuario
  *     responses:
  *       201:
  *         description: Usuario registrado exitosamente
@@ -62,7 +43,7 @@ router.post('/register', AuthController.register);
 
 /**
  * @swagger
- * /auth/login:
+ * /api/auth/login:
  *   post:
  *     summary: Inicio de sesión de un usuario
  *     tags: [Auth]
@@ -71,7 +52,17 @@ router.post('/register', AuthController.register);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/UserLogin'
+ *             type: object
+ *             required:
+ *               - username
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: Usuario
+ *               password:
+ *                 type: string
+ *                 example: Hola123456@
  *     responses:
  *       200:
  *         description: Usuario autenticado exitosamente
@@ -84,7 +75,7 @@ router.post('/login', AuthController.login);
 
 /**
  * @swagger
- * /auth/verify:
+ * /api/auth/verify:
  *   get:
  *     summary: Verificación del token de autenticación
  *     tags: [Auth]
